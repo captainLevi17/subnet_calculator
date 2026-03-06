@@ -1,80 +1,77 @@
-Subnet Calculator in Python
-Project Overview
+# Subnet Calculator in Python
 
-This project is a simple Subnet Calculator built in Python. It allows users to input an IPv4 address and either a CIDR notation or a subnet mask, then calculates and displays key subnet information:
+A simple, interactive command-line tool for calculating IPv4 subnet information. Enter an IP address and subnet mask (in CIDR or dotted-decimal format), and get the network address, broadcast address, usable hosts, and IP range instantly.
 
-Network Address
+## Features
 
-Broadcast Address
+- **Input Flexibility**: Accepts IPv4 addresses with CIDR notation (e.g., /24) or traditional subnet masks (e.g., 255.255.255.0).
+- **Comprehensive Calculations**:
+  - Network address
+  - Broadcast address
+  - Number of usable hosts (2^(32 - CIDR) - 2)
+  - Range of usable IP addresses
+- **Input Validation**: Ensures valid IPs, CIDRs (0-32), and subnet masks.
+- **User-Friendly Interface**: Interactive prompts with examples and error handling.
 
-Number of Usable Hosts
+Useful for network engineers, students, or anyone learning IP subnetting.
 
-Range of Usable IP Addresses
+## Requirements
 
-This tool is useful for network engineers, students, or anyone learning IP subnetting.
+- Python 3.6 or higher (uses built-in `ipaddress` module—no external dependencies).
 
-Features
+## Installation
 
-Accepts IPv4 addresses from the user
+1. Clone or download the repository.
+2. Ensure Python 3 is installed: `python3 --version`.
+3. Run the script: `python3 subnet_calculator.py`.
 
-Lets the user choose between CIDR notation (e.g., /24) or subnet mask (e.g., 255.255.255.0)
+## Usage
 
-Calculates and displays:
+1. Run the program: `python3 subnet_calculator.py`.
+2. Enter an IPv4 address (e.g., `192.168.1.100`).
+3. Choose input method: CIDR (e.g., `24`) or subnet mask (e.g., `255.255.255.0`).
+4. View the results!
 
-Network address
+### Example
 
-Broadcast address
+```
+Enter an IPv4 address: 192.168.1.100
 
-Number of usable hosts
+Choose input method for subnet mask:
+a) CIDR notation (e.g., 24)
+b) Subnet mask (e.g., 255.255.255.0)
 
-First and last usable IP addresses
-
-Validates user input for correctness
-
-How It Works
-
-User enters an IP address.
-
-User chooses whether to enter a CIDR or subnet mask.
-
-User enters the chosen format.
-
-The program performs calculations:
-
-Converts IP and subnet to binary
-
-Finds the network address using bitwise AND
-
-Finds the broadcast address using the inverted subnet mask
-
-Determines the number of usable hosts: 2^(32 - CIDR) - 2
-
-Determines the range of usable IP addresses
-
-Results are displayed clearly to the user.
-
-Example Usage
-Enter IP address: 192.168.1.10
-Do you want to use CIDR or Subnet Mask? (Enter CIDR/Mask): CIDR
-Enter CIDR notation (e.g., /24): /24
+Choice: a
+Enter CIDR (e.g., 24): 24
 
 Results:
-IP Address: 192.168.1.10
-Subnet Mask: 255.255.255.0
 Network Address: 192.168.1.0
+Subnet Mask: 255.255.255.0(/24)
 Broadcast Address: 192.168.1.255
-First Usable IP: 192.168.1.1
-Last Usable IP: 192.168.1.254
 Number of Usable Hosts: 254
+Usable IP Range: 192.168.1.1 - 192.168.1.254
+```
 
-Project Structure
-subnet_calculator/
-│
-├── subnet_calculator.py   # Main Python program
-├── utils.py               # Optional: helper functions for calculations
-├── README.md              # Project documentation
+## How It Works
 
-Future Enhancements
+1. **Input**: User provides an IP and subnet info.
+2. **Validation**: Checks for valid IPv4 and subnet formats.
+3. **Calculations**:
+   - **Network Address**: IP & subnet mask (bitwise AND).
+   - **Broadcast Address**: IP | (~subnet mask & 0xFFFFFFFF) (bitwise OR with inverted mask).
+   - **Usable Hosts**: 2^(32 - CIDR) - 2 (excludes network and broadcast).
+   - **IP Range**: Network + 1 to Broadcast - 1.
+4. **Output**: Displays all results clearly.
+
+## Contributing
+
+Feel free to submit issues or pull requests. Author: MLSG.
+
+## License
+
+MIT License
+
+## Future Enhancements
 
 Support for IPv6 addresses
 
@@ -84,21 +81,3 @@ Subnetting: divide a network into smaller subnets
 
 Export results to CSV or text file
 
-Dependencies
-
-Python
-
-No external libraries required for the basic version
-
-Getting Started
-
-Clone or download the repository.
-
-Open terminal or command prompt.
-
-Run the program:
-
-python subnet_calculator.py
-
-
-Follow the on-screen prompts.

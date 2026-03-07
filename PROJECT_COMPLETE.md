@@ -16,8 +16,8 @@ A fully functional, production-ready **GUI Subnet Calculator** built from the sp
 ```
 GUI_VERSION/
 ├── main.py                          # Application entry point
-├── requirements.txt                 # Dependencies (none required!)
-├── README.md                        # Full user documentation (250 lines)
+├── requirements.txt                 # Python 3.6+ is required and Tkinter
+├── README.md                        # Full user documentation (200+ lines)
 ├── QUICKSTART.md                    # 60-second quick start guide
 ├── BUILD_SUMMARY.md                 # Technical implementation details
 ├── CHANGELOG.md                     # Version history and features
@@ -245,7 +245,6 @@ Controller (gui/main_window.py)
 - [x] Complete documentation
 
 ### Phase 2 (Not Implemented - Planned)
-- [ ] Result history (last 10 calculations)
 - [ ] Keyboard shortcuts
 - [ ] Preset network buttons
 - [ ] CSV export

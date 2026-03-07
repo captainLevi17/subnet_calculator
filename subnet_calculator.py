@@ -136,13 +136,29 @@ def main():
     broadcast = calculate_broadcast_address(ip, mask)
     usable_hosts = calculate_usable_hosts(cidr)
     first_usable, last_usable = get_usable_ip_range(network, broadcast)
+    ip_type = "Public" if ipaddress.IPv4Address(ip).is_global else "Private"
+    wildcard = ipaddress.IPv4Address(~int(ipaddress.IPv4Address(mask)) & 0xFFFFFFFF)
     
     print("\nResults:")
+    print("=================" * 3)
+    print(f"IP Address: {ip}")
     print(f"Network Address: {network}")
-    print(f"Subnet Mask: {mask}(/{cidr})")
-    print(f"Broadcast Address: {broadcast}")
-    print(f"Number of Usable Hosts: {usable_hosts}")
     print(f"Usable IP Range: {first_usable} - {last_usable}\n")
+    print(f"Broadcast Address: {broadcast}")
+    print(f"Total number of hosts: {2 ** (32 - cidr)}")
+    print(f"Number of Usable Hosts: {usable_hosts}")
+    print(f"Subnet Mask: {mask}")
+    print(f"Wildcard Mask: {wildcard}")
+    print(f"Binary Subnet Mask: {' '.join(format(int(octet), '08b') for octet in mask.split('.'))}")
+    print(f"CIDR Notation: /{cidr}")
+    print(f"IP Type: {ip_type}")
+
+    print(f"\n Short: {ip} is a {ip_type} IP address in the network {network}/{cidr} with {usable_hosts} usable hosts.")
+    print(f"Binary ID: {ip} -> {' '.join(format(int(octet), '08b') for octet in ip.split('.'))}")
+    print(f"Integer Representation: {ip} -> {int(ipaddress.IPv4Address(ip))}")
+    print(f"Hexadecimal Representation: {ip} -> {hex(int(ipaddress.IPv4Address(ip)))}")
+
+    
 
 if __name__ == "__main__":
     main()
